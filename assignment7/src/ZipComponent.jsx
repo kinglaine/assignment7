@@ -2,26 +2,42 @@ import React, {useEffect, useState} from "react";
 import axios from "axios";
 
 function ZipComponent(props) {
-  const [zipCode, setZipCode] = useState([]);
+  const [zipCode, setZipCode] = useState("");
+  const [zipInfo, setZipInfo] = useState(null);
     // pokeList  === this.state.pokeList
     // setPokeList === this.state.pokeList
+    //api url format https://zip-api.eu/api/v1/radius/[country_code]-[postal_code]/[distance]/[unit]
+    // useEffect(() => {
+    //     async function fetchZip() {
+    //         try {
+    //             //link should be in the form of https://zip-api.eu/api/v1/radius/US-11373/5/km
+    //             //try 5 km first
+    //             const list = await axios.get(`https://zip-api.eu/api/v1/radius/US-${zipCode}/5/km`);
+    //             setZipCode(list.data.results);
+    //             // this.setState(list.data.results)
+    //         } catch (error) {
+    //             console.error(error);
+    //         }
+    //     }
+    //     fetchZip();
+    // }, []);
+    // console.log(props);
 
-    useEffect(() => {
-        async function fetchZip() {
-            try {
-                const list = await axios.get("");
-                setZipCode(list.data.results);
+    async function handleSubmit(event){
+      event.preventDefault();
+      console.log("submitted");
+      try {
+                //link should be in the form of https://zip-api.eu/api/v1/radius/US-11373/5/km
+                //try 5 km first
+                const list = await axios.get(`https://zip-api.eu/api/v1/radius/US-${zipCode}/5/km`);
+                setZipInfo(list.data.results);
+                console.log("testing", list);
+
                 // this.setState(list.data.results)
             } catch (error) {
                 console.error(error);
             }
-        }
-        fetchZip();
-    }, []);
-    console.log(props);
-
-    function handleSubmit(){
-      console.log("submitted");
+      //call fetchzip here
     }
 
     function handleChange(event){
