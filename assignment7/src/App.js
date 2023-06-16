@@ -1,9 +1,10 @@
 import logo from './logo.svg';
 import './App.css';
+import ZipComponent from './ZipComponent';
 
 function App() {
   return (
-    <p>hello</p>
+    <ZipComponent></ZipComponent>
   );
 }
 
